@@ -1,16 +1,36 @@
--- Jalankan script ini di Supabase Dashboard -> SQL Editor -> New Query -> Run
--- Script ini otomatis membuat tabel "Mahasiswa" sesuai kebutuhan aplikasi CRUD.
-
-create table if not exists public."Mahasiswa" (
-  nim bigint primary key,
-  nama text not null,
-  kelas text not null,
-  semester integer not null
+-- Membuat tabel Mahasiswa
+CREATE TABLE IF NOT EXISTS public."Mahasiswa" (
+    nim int8 PRIMARY KEY,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    nama varchar NOT NULL,
+    kelas varchar NOT NULL,
+    semester int2 NOT NULL
 );
 
--- Opsional: data contoh awal (boleh dihapus jika ingin tabel kosong)
-insert into public."Mahasiswa" (nim, nama, kelas, semester)
-values
-  (20240001, 'Budi Santoso', 'TI-1A', 2),
-  (20240002, 'Siti Rahma', 'TI-1B', 4)
-on conflict (nim) do nothing;
+-- Mengaktifkan Row Level Security
+ALTER TABLE public."Mahasiswa"
+ENABLE ROW LEVEL SECURITY;
+
+-- Memberikan izin akses CRUD
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON TABLE public."Mahasiswa"
+TO anon;
+
+-- Policy untuk latihan CRUD tanpa login
+DROP POLICY IF EXISTS "Allow CRUD"
+ON public."Mahasiswa";
+
+CREATE POLICY "Allow CRUD"
+ON public."Mahasiswa"
+FOR ALL
+TO anon
+USING (true)
+WITH CHECK (true);
+
+-- Data contoh
+INSERT INTO public."Mahasiswa"
+    (nim, nama, kelas, semester)
+VALUES
+    (20240001, 'Budi Santoso', 'TI-1A', 2),
+    (20240002, 'Siti Rahma', 'TI-1B', 4)
+ON CONFLICT (nim) DO NOTHING;
