@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Fitur
 
-## Getting Started
+- Menampilkan daftar data mahasiswa
+- Menambah data mahasiswa (`NIM`, `Nama`, `Kelas`, `Semester`)
+- Mengedit data mahasiswa
+- Menghapus data mahasiswa
 
-First, run the development server:
+## Prasyarat
+
+- [Node.js](https://nodejs.org/) (disarankan versi 20 ke atas)
+- Akun [Supabase](https://supabase.com/) (gratis)
+
+## Cara Menjalankan Project
+
+### 1. Clone Repository
+
+```bash
+git clone <url-repository-kamu>
+cd crud
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Database & Tabel `Mahasiswa` di Supabase
+
+Kamu **tidak perlu membuat tabel dan kolom satu per satu secara manual**:
+
+1. Buka [Supabase Dashboard](https://supabase.com/dashboard) lalu buat project baru (atau pakai project yang sudah ada).
+2. Masuk ke menu **SQL Editor** → klik **New query**.
+3. Copy seluruh isi file [`supabase/schema.sql`](./supabase/schema.sql), paste ke SQL Editor, lalu klik **Run**.
+4. Tabel `"Mahasiswa"` beserta data contoh awal akan otomatis terbuat.
+
+### 4. Konfigurasi Environment Variable (`.env`)
+
+1. Duplikat file `.env.example` menjadi `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   *(Di Windows Command Prompt bisa pakai `copy .env.example .env`, atau buat file `.env` secara manual).*
+
+2. Buka Supabase Dashboard → **Project Settings** → **API / Data API**, lalu salin **Project URL** dan **Publishable Key** ke dalam file `.env`:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxxx
+   ```
+
+### 5. Jalankan Aplikasi
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Buka browser dan akses [http://localhost:3000](http://localhost:3000).
