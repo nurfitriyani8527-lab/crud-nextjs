@@ -15,7 +15,7 @@
 ### 1. Clone Repository
 
 ```bash
-git clone <url-repository-kamu>
+git clone https://github.com/nurfitriyani8527-lab/crud-nextjs.git
 cd crud
 ```
 
